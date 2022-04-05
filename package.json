@@ -26,6 +26,7 @@
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.9",
+    "route-cache": "^0.4.7",
     "winston": "^3.7.1"
   }
 }
