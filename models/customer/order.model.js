@@ -15,7 +15,8 @@ const orderSchema = new mongoose.Schema({
     },
     paymentMethod: {
         mode: {
-            type: String
+            type: String,
+            default:"cash on delivery"
         },
         transactionId: {
             type: String
@@ -25,9 +26,17 @@ const orderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'customer'
     },
-    orderItems: [
+    orderedItem: [
         {
-            type: Object,
+            ProductId: {
+                type: Schema.Types.ObjectId,
+                ref: 'product'
+            }
+            ,
+            Qty: {
+                type: Number,
+                default: 1
+            }
         }
     ],
     orderedAt: {
