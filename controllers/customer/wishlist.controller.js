@@ -1,19 +1,19 @@
-const Cart = require('../../models/customer/cart.model')
+const Wishlist = require('../../models/customer/wishlist.model')
 
-exports.AddToCart = async (request, response) => {
+exports.AddToWishlist = async (request, response) => {
     const customerId = request.customer._id
     console.log("Customer Id: ", customerId)
-    var check = await Cart.findOne({ customer: customerId});
-    console.log("Cart.findOne check: "+check)
-    const cartId = request.body.cartItems
-    console.log('Cart Items: ', cartId)
+    var check = await Wishlist.findOne({ customer: customerId});
+    console.log("Wishlist.findOne check: "+check)
+    const wishlistId = request.body.wishlistItems
+    console.log('Wishlist Items: ', wishlistId)
     
     if(!check){
-        check = new Cart({
+        check = new Wishlist({
             customer: customerId
         })
     }
-    check.cartItems.push(cartId)
+    check.wishlistItems.push(wishlistId)
     await check.save()
     .then(result => {
          console.log("Check save: "+result);
@@ -25,26 +25,26 @@ exports.AddToCart = async (request, response) => {
 }
 
 
-exports.ViewCart = async (request, response) => {
+exports.ViewWishlist = async (request, response) => {
     const customerId = request.customer._id
-    await Cart.findOne({customer: customerId}).populate('cartItems').exec()
+    await Wishlist.findOne({customer: customerId}).populate('wishListItems').exec()
     .then(result => {
         return response.status(200).json(result)
     })
     .catch(error => {
-        return response.status(500).json({msg: "error in cart view "})
+        return response.status(500).json({msg: "error in wishlist view "})
     })
 }
 
-exports.DeleteCartItem = async (request, response) => {
+exports.DeleteWishlistItem = async (request, response) => {
     const {itemId} = request.params
     const customerId = request.customer._id
     console.log("Customer Id from token: " + customerId)
-    await Cart.updateOne({customer: customerId},
+    await Wishlist.updateOne({customer: customerId},
         {
             $pullAll:
             {
-            cartItems: [itemId]
+            wishlistItems: [itemId]
         }
 })
     .then(result => {
@@ -57,10 +57,10 @@ exports.DeleteCartItem = async (request, response) => {
     })
 }
 
-exports.DeleteCart = async (request, response) => {
-    await Cart.deleteMany({_id: request.params.cartId})
+exports.DeleteWishlist = async (request, response) => {
+    await Wishlist.deleteMany({_id: request.params.wishlistId})
     .then(result => {
-        return response.status(200).json({msg: "Cart Cleared."})
+        return response.status(200).json({msg: "wishlist Cleared."})
     })
     .catch(err => {
         return response.status(500).json({ msg: "Could not clear"})

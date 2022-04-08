@@ -5,6 +5,9 @@ const app = express()
 const mongoose = require('mongoose')
 mongoose.connect("mongodb+srv://CodePriyanshu786:pathak123@mucluster.utw9l.mongodb.net/CakeLicious?retryWrites=true&w=majority")
 const cors = require('cors')
+const helmet = require('helmet')
+const hpp = require('hpp')
+
 app.use(cors())
 const port = process.env.PORT || 8080
 
@@ -14,10 +17,16 @@ const adminRoute = require('./routes/admin/adminRoute')
 const customerRoute = require('./routes/customer/customerRoute')
 const indexRoute = require('./routes/index')
 
+//Helmet helps you secure your Express apps by setting various HTTP headers. It's not a silver bullet, but it can help!
+app.use(helmet())
 
 app.use(express.json({limit : '50MB'}))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({extended: true}))
+
+//HPP puts array parameters in req.query and/or req.body aside and just selects the last parameter value. You add the middleware and you are done.
+app.use(hpp())
+
 app.use(bodyParser.json())
 
 //Base route for Admin

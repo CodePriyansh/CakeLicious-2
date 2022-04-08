@@ -25,6 +25,19 @@ const customerSchema = new mongoose.Schema({
         trim: true,
         min: 4
     },
+    address1: {
+        type: String
+    },
+    profilePic: {
+        type: String,
+        trim: true
+    },
+    location: {
+        type: String,
+    },
+    bio: {
+        type: String
+    },
     status: {
         type: Boolean,
         default: false

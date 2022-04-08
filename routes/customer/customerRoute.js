@@ -2,32 +2,36 @@
 
 const express = require('express')
 const router = express.Router();
-const User = require('../../models/customer/customer.model')
 const Product = require('../../models/admin/prod.model');
-const Support = require('../../models/customer/support.model');
+const Support = require('../../models/admin/admin.support.model');
+const customerController = require('../../controllers/customer/customer.controller')
+const cartController = require('../../controllers/customer/cart.controller')
+const wishlistController = require('../../controllers/customer/wishlist.controller')
+const orderController = require('../../controllers/customer/order.controller')
+
+const auth = require('../../core/middlewares/userTokenVerify')
+
+
 const { request } = require('express');
-router.post('/sign-up',(request,response)=>{
+const multer = require('multer')
 
-     User.create(request.body).then((result)=>{
-         return response.status(200).json(result)
-     }).catch((error)=>{
-         return response.status(500).json(error)
-     })
-
+let storage = multer.diskStorage({
+    destination: 'public/customer/media',
+    filename: (request, file, callback) => {
+        callback(null, "profile" + Date.now() + "_" + file.originalname)
+    }
 })
 
-router.post('/sign-in',(request,response)=>{
+let upload = multer({storage: storage})
 
-    User.find({email:request.body.email,password:request.body.password}).then((result)=>{
-               return  response.status(200).json(result)
-    }).catch((error)=>{
-        return  response.status(500).json(error)
 
-    })
-})
+router.post('/sign-up', customerController.Signup)
+
+router.post('/verify-email', customerController.verifyEmail)
+
+router.post('/sign-in',customerController.Signin)
 
 router.get('/view-all-products',(request,response)=>{
-      
   Product.find().then((result)=>{
               return response.status(200).json(result)
   }).catch((error)=>{
@@ -64,6 +68,27 @@ router.post('/customer-query',(request,response)=>{
        
 })
 
+router.post('/profile', auth, upload.single("profilePic"), customerController.Profile)
+
+router.post('/add-to-card', auth, cartController.AddToCart)
+
+router.post('/view-cart', auth, cartController.ViewCart)
+
+router.post('/delete-cart-item/:itemId', auth, cartController.DeleteCartItem)
+
+router.post('/delete-cart', auth, cartController.DeleteCart)
+
+router.post('/add-to-wishlist', auth, wishlistController.AddToWishlist)
+
+router.post('/view-wishlist', auth, wishlistController.ViewWishlist)
+
+router.post('/delete-wishlist-item/:itemId', auth, wishlistController.DeleteWishlistItem)
+
+router.post('/delete-wishlist', auth, wishlistController.DeleteWishlist)
+
+router.post('/place-order', auth, orderController.PlaceOrder)
+
+// router.post('/view-orders', auth, orderController.ViewOrder)
+
 
 module.exports = router;
-
