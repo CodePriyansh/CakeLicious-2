@@ -27,11 +27,17 @@ let upload = multer({storage: storage})
 
 router.post('/sign-up', customerController.Signup)
 
-router.post('/verify-email', customerController.verifyEmail)
+router.get('/verify-email/:id', customerController.verifyEmail)
+
+router.post('/verify-email-resend', customerController.resendVerifyEmail)
+
+router.post('/reset-password', customerController.resetPassword)
+
+router.post('/verify-otp/:id', customerController.verifyOTP)
 
 router.post('/sign-in',customerController.Signin)
 
-router.get('/view-all-products',(request,response)=>{
+router.get('/view-all-products', auth, (request,response)=>{
   Product.find().then((result)=>{
               return response.status(200).json(result)
   }).catch((error)=>{
@@ -39,7 +45,7 @@ router.get('/view-all-products',(request,response)=>{
   })
 })
 
-router.get('/view-prod-by-category',(request,response)=>{
+router.get('/view-prod-by-category', auth, (request,response)=>{
       
     Product.find({category:request.body._id}).then((result)=>{
           return response.status(200).json(result)
@@ -48,7 +54,7 @@ router.get('/view-prod-by-category',(request,response)=>{
     })
 })  
 
-router.get('/search-product',(request,response)=>{
+router.get('/search-product', auth, (request,response)=>{
 
     Product.find({prodName:{$regex:req.body.name,$options:'$i'}}).then((result)=>{
           return response.status(200).json(result)
@@ -58,14 +64,12 @@ router.get('/search-product',(request,response)=>{
 })
 
 
-router.post('/customer-query',(request,response)=>{
-      
+router.post('/customer-query', auth, (request,response)=>{
      Support.create(request.body).then((result)=>{
          return response.status(200).json(result);
      }).catch((error)=>{
           return response.status(500).json(error);
      })
-       
 })
 
 router.post('/profile', auth, upload.single("profilePic"), customerController.Profile)
