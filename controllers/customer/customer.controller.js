@@ -32,8 +32,6 @@ exports.Signup = async (request, response) => {
             password: hash,
             mobile: mobile,
             address1: "",
-            address2: "",
-            address3: "",
             profilePic: "",
             location: "",
             bio: ""
@@ -54,7 +52,7 @@ exports.Signup = async (request, response) => {
             )
             let link = domain + '/customer/verify-email/' + verifyEmailToken
             let mailDetails = {
-                from: '"CakeLicious 🎂" <process.env.EMAIL>', // sender address
+                from: process.env.EMAIL, // sender address
                 to: result.email, // list of receivers
                 subject: "Email verification!", // Subject line
                 html: "<b>Congratulations " + result.name + "! Your account has been created successfully on</b>" +
@@ -163,10 +161,18 @@ exports.Signin = async (request, response) => {
 }
 
 exports.verifyEmail = async (request, response) => {
+    console.log("starts")
     let paramsToken = request.params.id
+    console.log(paramsToken)
     let decoded = jwt.verify(paramsToken, process.env.EMAIL_TOKEN_KEY)
+    console.log(decoded)
+
     request.verifyEmailToken = decoded
+    console.log(request.verifyEmailToken)
+
     const tokenDecoded = request.verifyEmailToken.emailVerification
+    console.log(tokenDecoded)
+
     console.log("Verify email ka console with request: " + tokenDecoded._id)
     Customer.updateOne({
         _id: tokenDecoded._id
