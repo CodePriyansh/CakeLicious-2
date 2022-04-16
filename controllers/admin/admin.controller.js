@@ -36,7 +36,7 @@ exports.signin = (request, response, next) => {
         })
         .then(result => {
             console.log(result);
-            if (result) {
+            if (result.length) {
                 let paylod = { subject: result._id };
                 let token = jwt.sign(paylod, 'abcdefghijklm');
                 return response.status(200).json({
@@ -44,6 +44,8 @@ exports.signin = (request, response, next) => {
                     current_user: result,
                     token: token
                 })
+            }else{
+                response.status(400).json({msg:"psw incorrect"})
             }
         })
         .catch(err => {
