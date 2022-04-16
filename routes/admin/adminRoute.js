@@ -20,7 +20,7 @@ router.post("/signin", adminController.signin);
 router.post("/signup", adminController.signup);
 // -------------------------------------------------------------------------------------
 router.post("/addCategory", tokenVerification.varifyToken, upload.single('catImage'), categoryController.addCategory);
-router.get("/ViewCategory", tokenVerification.varifyToken, categoryController.getCategory);
+router.get("/ViewCategory",  categoryController.getCategory);
 router.post("/deleteCategory", tokenVerification.varifyToken, categoryController.deleteCategory);
 router.post("/updateCategory", upload.single('catImage'), tokenVerification.varifyToken, categoryController.updateCategory);
 //--------------------------------------------------------------------------------------
