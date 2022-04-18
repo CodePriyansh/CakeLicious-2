@@ -31,7 +31,7 @@ exports.updateCategory = (request, response, next) => {
         _id: request.body.categoryid,
         $set: {
             catName: request.body.catName,
-            catImage: "https://localhost:3000/images/" + request.file.filename
+            catImage: "https://cakelicious-2.herokuapp.com/images" + request.file.filename
         }
     }).then(result => {
         if (result.modifiedCount)
@@ -47,7 +47,7 @@ exports.addCategory = (request, response, next) => {
     console.log(request.file);
     Category.create({
             catName: request.body.catName,
-            catImage: "https://localhost:8080/images/" + request.file.filename
+            catImage: "https://cakelicious-2.herokuapp.com/images" + request.file.filename
         })
         .then(result => {
             return response.status(201).json(result);
