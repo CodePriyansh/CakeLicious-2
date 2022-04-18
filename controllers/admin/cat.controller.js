@@ -44,7 +44,7 @@ exports.getCategory = (request, response) => {
     Category.find().
     then(results => {
         console.log(results)
-            return response.status(200).json(results,{msg:"somemsg"});
+            return response.status(200).json(results);
         })
         .catch(err => {
             return response.status(500).json({ message: 'Sever Error' });
