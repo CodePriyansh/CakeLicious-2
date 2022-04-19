@@ -29,7 +29,7 @@ router.post("/updateCategory",tokenVerification.varifyToken, upload.single('catI
 
 router.post("/addProduct",tokenVerification.varifyToken, upload.single('prodImage'), productController.addProduct);
 router.get("/ViewProduct",tokenVerification.varifyToken, productController.getProduct);
-router.get("/ViewProductByCAtegory",tokenVerification.varifyToken, productController.getProductByCategory);
+router.post("/ViewProductByCAtegory",tokenVerification.varifyToken, productController.getProductByCategory);
 router.post("/deleteProduct",tokenVerification.varifyToken, productController.deleteProduct);
 router.post("/updateProduct",tokenVerification.varifyToken, upload.single('prodImage'), productController.updateProduct);
 //--------------------------------------------------------------------------------------
