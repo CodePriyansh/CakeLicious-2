@@ -25,7 +25,7 @@ const uploadFile = async (filename) => {
 exports.addProduct = (request, response, next) => {
     console.log(request.body);
     console.log(request.file);
-   uploadFile(path.join("public/images/") + req.file.filename) 
+   uploadFile(path.join("public/images/") + request.file.filename) 
 
     Product.create({
             category: request.body.category,
