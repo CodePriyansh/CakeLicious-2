@@ -21,10 +21,8 @@ const uploadFile = async (filename) => {
         }
       },
     });
-  
     console.log(`${filename} uploaded to ${bucketName}.`);
   }
-
 exports.deleteCategory = (request, response) => {
 
     Category.deleteOne({ _id: request.body.id })
@@ -66,8 +64,6 @@ exports.updateCategory = (req, response, next) => {
 }else{
     newImage = "https://firebasestorage.googleapis.com/v0/b/storeimges.appspot.com/o/"+req.body.oldImage+"?alt=media&token=hello";
 }
-  
-     
     Category.updateOne({
         _id: req.body.categoryid,
         $set: {
