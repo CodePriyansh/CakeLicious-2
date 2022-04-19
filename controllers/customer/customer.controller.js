@@ -18,6 +18,7 @@ let mailTransporter = nodemailer.createTransport({
 
 
 const Customer = require('../../models/customer/customer.model')
+const Product = require('../../models/admin/prod.model')
 
 exports.Signup = async (request, response) => {
     const { name, email, mobile, password } = request.body
