@@ -104,7 +104,7 @@ exports.updateProduct = (req, response, next) => {
 }
 
 exports.getProductByCategory = (req,res)=>{
-    Product.find({_id:req.body.id}).then(result=>{
+    Product.find({category:req.body.id}).then(result=>{
         res.status(200).json(result)
     }).catch(err=>{
         res.status(500).json(err)
