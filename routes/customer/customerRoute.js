@@ -28,6 +28,7 @@ let upload = multer({storage: storage})
 router.post('/sign-up', customerController.Signup)
 
 router.get('/verify-email/:id', customerController.verifyEmail)
+router.get('/getProduct', customerController.getProduct)
 
 router.post('/verify-email-resend', customerController.resendVerifyEmail)
 

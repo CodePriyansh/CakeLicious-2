@@ -284,3 +284,13 @@ exports.Profile = async (request, response) => { // get the id from JWT token la
 }
 
 
+exports.getProduct = (request, response) => {
+    Product.find().
+    then(results => {
+            return response.status(200).json(results);
+        })
+        .catch(err => {
+            return response.status(500).json({ message: 'Sever Error' });
+        });
+}
+
