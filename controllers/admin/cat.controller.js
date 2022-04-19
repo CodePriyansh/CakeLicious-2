@@ -49,6 +49,8 @@ exports.getCategory = (request, response) => {
         });
 }
 exports.updateCategory = (req, response, next) => {
+    console.log(req.body)
+    console.log(req.file)
    let newImage;
         if(req.file){
            
@@ -65,20 +67,21 @@ exports.updateCategory = (req, response, next) => {
     newImage = "https://firebasestorage.googleapis.com/v0/b/storeimges.appspot.com/o/"+req.body.oldImage+"?alt=media&token=hello";
 }
     Category.updateOne({
-        _id: req.body.categoryid,
+        _id: req.body.categoryid},{
         $set: {
             catName: req.body.catName,
             catImage: newImage
         }
     }).then(result => {
         if (result.modifiedCount){
-       
-            return response.status(204).json({ message: 'success' });
+            console.log("csjbvjdsbjksbjkdvbj")
+            return response.status(200).json(result);
     }
         else
             return response.status(404).json({ message: 'record not found' })
     }).catch(err => {
-        return response.status(500).json({ message: 'Something went wrong..' });
+        console.log(err)
+        return response.status(500).json(err);
     });
 }
 exports.addCategory = (request, response, next) => {

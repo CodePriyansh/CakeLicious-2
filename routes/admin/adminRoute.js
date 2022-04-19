@@ -1,5 +1,7 @@
+// const tokenVerification = require('../../core/middlewares/adminTokenVerify');
 const express = require('express');
 const router = express.Router();
+
 
 const tokenVerification = require("../../core/middlewares/adminTokenVerify");
 const categoryController = require("../../controllers/admin/cat.controller");
@@ -19,16 +21,16 @@ console.log('categoryName');
 router.post("/signin", adminController.signin);
 router.post("/signup", adminController.signup);
 // -------------------------------------------------------------------------------------
-router.post("/addCategory", upload.single('catImage'), categoryController.addCategory);
-router.get("/ViewCategory", categoryController.getCategory);
-router.post("/deleteCategory", categoryController.deleteCategory);
-router.post("/updateCategory", upload.single('catImage'), categoryController.updateCategory);
+router.post("/addCategory",tokenVerification.varifyToken, upload.single('catImage'), categoryController.addCategory);
+router.get("/ViewCategory",tokenVerification.varifyToken, categoryController.getCategory);
+router.post("/deleteCategory",tokenVerification.varifyToken, categoryController.deleteCategory);
+router.post("/updateCategory",tokenVerification.varifyToken, upload.single('catImage'), categoryController.updateCategory);
 //--------------------------------------------------------------------------------------
 
-router.post("/addProduct", upload.single('prodImage'), productController.addProduct);
-router.get("/ViewProduct", productController.getProduct);
-router.post("/deleteProduct", productController.deleteProduct);
-router.post("/updateProduct", upload.single('prodImage'), productController.updateProduct);
+router.post("/addProduct",tokenVerification.varifyToken, upload.single('prodImage'), productController.addProduct);
+router.get("/ViewProduct",tokenVerification.varifyToken, productController.getProduct);
+router.post("/deleteProduct",tokenVerification.varifyToken, productController.deleteProduct);
+router.post("/updateProduct",tokenVerification.varifyToken, upload.single('prodImage'), productController.updateProduct);
 //--------------------------------------------------------------------------------------
 // router.post("/support", supportController.support);
 // router.post("/query", supportController.query);

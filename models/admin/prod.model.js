@@ -21,6 +21,9 @@ const productSchema = new mongoose.Schema({
     prodDescription: {
         type: String
     },
+    flavour:{
+        type: String
+    },
     prodReview: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'order'
