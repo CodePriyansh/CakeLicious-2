@@ -282,3 +282,5 @@ exports.Profile = async (request, response) => { // get the id from JWT token la
         return response.status(500).json({ msg: "Something went wrong! Please check your details", error: err })
     }
 }
+
+
