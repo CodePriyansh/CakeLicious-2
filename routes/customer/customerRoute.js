@@ -26,6 +26,8 @@ let upload = multer({storage: storage})
 
 
 router.post('/sign-up', customerController.Signup)
+router.post('/login', customerController.login)
+router.post('/signup', customerController.signup)
 
 router.get('/verify-email/:id', customerController.verifyEmail)
 router.get('/getProduct', customerController.getProduct)
@@ -39,7 +41,7 @@ router.post('/verify-otp/:id', customerController.verifyOTP)
 
 router.post('/sign-in',customerController.Signin)
 
-router.get('/view-all-products', auth, (request,response)=>{
+router.get('/view-all-products', auth.verifytoken, (request,response)=>{
   Product.find().then((result)=>{
               return response.status(200).json(result)
   }).catch((error)=>{
@@ -47,7 +49,7 @@ router.get('/view-all-products', auth, (request,response)=>{
   })
 })
 
-router.get('/view-prod-by-category', auth, (request,response)=>{
+router.get('/view-prod-by-category', (request,response)=>{
       
     Product.find({category:request.body._id}).then((result)=>{
           return response.status(200).json(result)
@@ -56,7 +58,7 @@ router.get('/view-prod-by-category', auth, (request,response)=>{
     })
 })  
 
-router.get('/search-product', auth, (request,response)=>{
+router.get('/search-product', (request,response)=>{
 
     Product.find({prodName:{$regex:req.body.name,$options:'$i'}}).then((result)=>{
           return response.status(200).json(result)
@@ -66,7 +68,7 @@ router.get('/search-product', auth, (request,response)=>{
 })
 
 
-router.post('/customer-query', auth, (request,response)=>{
+router.post('/customer-query', auth.verifytoken, (request,response)=>{
      Support.create(request.body).then((result)=>{
          return response.status(200).json(result);
      }).catch((error)=>{
@@ -74,25 +76,25 @@ router.post('/customer-query', auth, (request,response)=>{
      })
 })
 
-router.post('/profile', auth, upload.single("profilePic"), customerController.Profile)
+router.post('/profile', auth.verifytoken, upload.single("profilePic"), customerController.Profile)
 
-router.post('/add-to-card', auth, cartController.AddToCart)
+router.post('/add-to-card', auth.verifytoken, cartController.AddToCart)
 
-router.post('/view-cart', auth, cartController.ViewCart)
+router.post('/view-cart', auth.verifytoken, cartController.ViewCart)
 
-router.post('/delete-cart-item/:itemId', auth, cartController.DeleteCartItem)
+router.post('/delete-cart-item/:itemId', auth.verifytoken, cartController.DeleteCartItem)
 
-router.post('/delete-cart', auth, cartController.DeleteCart)
+router.post('/delete-cart', auth.verifytoken, cartController.DeleteCart)
 
-router.post('/add-to-wishlist', auth, wishlistController.AddToWishlist)
+router.post('/add-to-wishlist', auth.verifytoken, wishlistController.AddToWishlist)
 
-router.post('/view-wishlist', auth, wishlistController.ViewWishlist)
+router.post('/view-wishlist', auth.verifytoken, wishlistController.ViewWishlist)
 
-router.post('/delete-wishlist-item/:itemId', auth, wishlistController.DeleteWishlistItem)
+router.post('/delete-wishlist-item/:itemId', auth.verifytoken, wishlistController.DeleteWishlistItem)
 
-router.post('/delete-wishlist', auth, wishlistController.DeleteWishlist)
+router.post('/delete-wishlist', auth.verifytoken, wishlistController.DeleteWishlist)
 
-router.post('/place-order', auth, orderController.PlaceOrder)
+router.post('/place-order', auth.verifytoken, orderController.PlaceOrder)
 
 // router.post('/view-orders', auth, orderController.ViewOrder)
 

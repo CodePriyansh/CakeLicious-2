@@ -1,21 +1,44 @@
-const jwt = require('jsonwebtoken')
-const config = process.env
+// const jwt = require('jsonwebtoken')
+// const config = process.env
 
-const verifyToken = (request, response, next) => {
-    const token =
-        request.body.token || request.query.token || request.headers.authorization || request.headers["token"]
+// const verifyToken = (request, response, next) => {
+//     const token =
+//         request.body.token || request.query.token || request.headers.authorization || request.headers["token"]
 
-    if (!token) {
-        return response.status(403).json("A token is required for authentication")
+//     if (!token) {
+//         return response.status(403).json("A token is required for authentication")
+//     }
+//     try {
+//         const decoded = jwt.verify(token, config.TOKEN_KEY)
+//         request.customer = decoded
+//     } catch (err) {
+//         console.log("Error in token: "+err)
+//         return response.status(401).json({ err: "Invalid Token", error: err })
+//     }
+//     return next()
+// }
+
+// module.exports = verifyToken
+
+
+
+const jwt  = require("jsonwebtoken")
+
+exports.verifytoken =  (req,res,next)=>{
+
+    try{
+         console.log("token"+req.headers.authorization)
+         if(!req.headers.authorization){
+             console.log("if statement")
+             res.status(400).send('unAutorized Request')
+         }
+
+         let token  = req.headers.authorization.split(' ')[1];
+        console.log(token)
+         let payload = jwt.verify(token,'secret');
+         console.log(payload);
+         next();
+    }catch(err){
+       res.status(400).send(err)
     }
-    try {
-        const decoded = jwt.verify(token, config.TOKEN_KEY)
-        request.customer = decoded
-    } catch (err) {
-        console.log("Error in token: "+err)
-        return response.status(401).json({ err: "Invalid Token", error: err })
-    }
-    return next()
 }
-
-module.exports = verifyToken

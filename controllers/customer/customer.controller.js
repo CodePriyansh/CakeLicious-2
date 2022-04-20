@@ -304,3 +304,41 @@ exports.getProductById = (request, response) => {
             return response.status(500).json({ message: 'Sever Error' });
         });
 }
+
+
+
+exports.login = (req,res)=>{
+
+        Customer.findOne({ email: req.body.email, password: req.body.password }).then((result) => {
+          if (result) {
+            console.log(result)
+            let payload = { subject: result._id }
+            let token = jwt.sign(payload, "secret")
+            res.status(200).json({ result: result, token: token, status: "ok" })
+          }
+          else {
+            res.status(200).json({ message: "something went wrong", result })
+          }
+        }).catch((err) => {
+          res.status(500).json(err)
+        })
+}
+
+exports.signup= (req,res)=>{
+    Customer.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      mobile:req.body.mobile
+    }).then((result) => {
+      console.log(result)
+      res.status(200).json(result)
+    }).catch((err) => {
+      console.log(err)
+      res.status(500).json(err)
+    })
+  }
+  
+
+
+
