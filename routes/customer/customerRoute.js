@@ -29,6 +29,7 @@ router.post('/sign-up', customerController.Signup)
 
 router.get('/verify-email/:id', customerController.verifyEmail)
 router.get('/getProduct', customerController.getProduct)
+router.get('/getProductById', customerController.getProductById)
 
 router.post('/verify-email-resend', customerController.resendVerifyEmail)
 
