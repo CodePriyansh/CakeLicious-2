@@ -295,7 +295,7 @@ exports.getProduct = (request, response) => {
         });
 }
 
-exports.getProduct = (request, response) => {
+exports.getProductById = (request, response) => {
     Product.find({_id:request.body.id}).
     then(results => {
             return response.status(200).json(results);
