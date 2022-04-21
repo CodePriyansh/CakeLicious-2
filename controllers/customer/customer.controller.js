@@ -2,7 +2,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const otpGenerator = require('otp-generator')
 const nodemailer = require('nodemailer')
-const Razorpay = require('razorpay')
 
 const auth = require('../../core/middlewares/userTokenVerify')
 require('dotenv').config()
