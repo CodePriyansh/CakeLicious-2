@@ -2,6 +2,8 @@
 
 const express = require('express')
 const router = express.Router();
+const { request } = require('express');
+
 const Product = require('../../models/admin/prod.model');
 const Support = require('../../models/admin/admin.support.model');
 const customerController = require('../../controllers/customer/customer.controller')
@@ -11,8 +13,9 @@ const orderController = require('../../controllers/customer/order.controller')
 
 const auth = require('../../core/middlewares/userTokenVerify')
 
+const Razorpay = require('razorpay')
+var instance = new Razorpay({ key_id: 'rzp_test_zG2UPfGE20QkVD', key_secret: '3xujWy2PWJ9TsCRJrtMUXUt7' })
 
-const { request } = require('express');
 const multer = require('multer')
 
 let storage = multer.diskStorage({
@@ -23,6 +26,32 @@ let storage = multer.diskStorage({
 })
 
 let upload = multer({storage: storage})
+
+
+router.post('/order',(req,res)=>
+ {
+     console.log(req.body)
+    instance.orders.create({
+        amount:100,
+        currency: "INR",
+        receipt: "receipt#1"
+      },(err,order)=>{
+          console.log(order)
+          res.json(order)
+      })
+ })
+
+
+ router.post("/order-status",(req,res)=>{
+
+    instance.payments.fetch(req.body.razorpay_payment_id).then(paymentDetail=>{
+        console.log(paymentDetail)
+        res.json(paymentDetail)
+    })
+
+
+ })
+
 
 
 router.post('/sign-up', customerController.Signup)
