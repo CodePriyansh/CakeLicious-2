@@ -93,7 +93,7 @@ router.get('/view-prod-by-category', (request,response)=>{
 
 router.post('/search-product', (request,response)=>{
 
-    Product.find({prodName:{$regex:req.body.name,$options:'$i'}}).then((result)=>{
+    Product.find({prodName:{$regex:request.body.name,$options:'$i'}}).then((result)=>{
           return response.status(200).json(result)
     }).catch((error)=>{
        return response.status(500).json(error)
