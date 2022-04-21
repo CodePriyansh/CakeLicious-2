@@ -46,6 +46,9 @@ router.post('/order',(req,res)=>
 
     instance.payments.fetch(req.body.razorpay_payment_id).then(paymentDetail=>{
         console.log(paymentDetail)
+        res.render("success.ejs",{
+            result:paymentDetail
+        })
         res.json(paymentDetail)
     })
 
