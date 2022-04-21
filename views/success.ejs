@@ -5,79 +5,127 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-{"id":"pay_JLollKpq7Yy2og","entity":"payment","amount":100,"currency":"INR","status":"captured","order_id":"order_JLoleVjLePKhkJ","invoice_id":null,"international":false,"method":"netbanking","amount_refunded":0,"refund_status":null,"captured":true,"description":"Test Transaction","card_id":null,"bank":"YESB","wallet":null,"vpa":null,"email":"user2123@gmail.com","contact":"+917418529635","notes":{"address":"Razorpay Corporate Office"},"fee":2,"tax":0,"error_code":null,"error_description":null,"error_source":null,"error_step":null,"error_reason":null,"acquirer_data":{"bank_transaction_id":"4325980"},"created_at":1650502980}
-<body>
+<style>
+    *{
+  box-sizing:border-box;
+ /* outline:1px solid ;*/
+}
+body{
+background: #ffffff;
+background: linear-gradient(to bottom, #ffffff 0%,#e1e8ed 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e1e8ed',GradientType=0 );
+    height: 100%;
+        margin: 0;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+  
+}
 
-    <div class="container mt-4 mb-4">
-        <div class="row d-flex cart align-items-center justify-content-center">
-            <div class="col-md-10">
-                <div class="card">
-                    <div class="d-flex justify-content-center border-bottom">
-                        <div class="p-3">
-                            <div class="progresses">
-                                <div class="steps"> <span><i class="fa fa-check"></i></span> </div> <span class="line"></span>
-                                <div class="steps"> <span><i class="fa fa-check"></i></span> </div> <span class="line"></span>
-                                <div class="steps"> <span class="font-weight-bold">3</span> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row g-0">
-                        <div class="col-md-6 border-right p-5">
-                            <div class="text-center order-details">
-                                <div class="d-flex justify-content-center mb-5 flex-column align-items-center"> <span class="check1"><i class="fa fa-check"></i></span> <span class="font-weight-bold">Order Confirmed</span> <small class="mt-2">Your illustraion will go to you soon</small> <a href="#" class="text-decoration-none invoice-link">View Invoice</a> </div> <button class="btn btn-danger btn-block order-button">Go to your Order</button>
-                            </div>
-                        </div>
-                        <div class="col-md-6 background-muted">
-                            <div class="p-3 border-bottom">
-                                <div class="d-flex justify-content-between align-items-center"> <span><i class="fa fa-clock-o text-muted"></i> 3 days delivery</span> <span><i class="fa fa-refresh text-muted"></i> 2 Max Revisions</span> </div>
-                                <div class="mt-3">
-                                    <h6 class="mb-0">Illustraion in Sketch or AI</h6> <span class="d-block mb-0">Includes: Sketch, PSD, PNG, SVG, AI </span> <small>Min: 1 illustraion</small>
-                                    <div class="d-flex flex-column mt-3"> <small><i class="fa fa-check text-muted"></i> Vector file</small> <small><i class="fa fa-check text-muted"></i> Sources files</small> </div>
-                                </div>
-                            </div>
-                            <div class="row g-0 border-bottom">
-                                <div class="col-md-6 border-right">
-                                    <div class="p-3 d-flex justify-content-center align-items-center"> <span>x3</span> </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="p-3 d-flex justify-content-center align-items-center"> <span>$20 per unit</span> </div>
-                                </div>
-                            </div>
-                            <div class="row g-0 border-bottom">
-                                <div class="col-md-6">
-                                    <div class="p-3 d-flex justify-content-center align-items-center"> <span>Subtotal</span> </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="p-3 d-flex justify-content-center align-items-center"> <span>$60</span> </div>
-                                </div>
-                            </div>
-                            <div class="row g-0 border-bottom">
-                                <div class="col-md-6">
-                                    <div class="p-3 d-flex justify-content-center align-items-center"> <span>Processing fees</span> </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="p-3 d-flex justify-content-center align-items-center"> <span>$1.80</span> </div>
-                                </div>
-                            </div>
-                            <div class="row g-0">
-                                <div class="col-md-6">
-                                    <div class="p-3 d-flex justify-content-center align-items-center"> <span class="font-weight-bold">Total</span> </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="p-3 d-flex justify-content-center align-items-center"> <span class="font-weight-bold">$61.80</span> </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div> </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+.wrapper-1{
+  width:100%;
+  height:100vh;
+  display: flex;
+flex-direction: column;
+}
+.wrapper-2{
+  padding :30px;
+  text-align:center;
+}
+h1{
+    font-family: 'Kaushan Script', cursive;
+  font-size:4em;
+  letter-spacing:3px;
+  color:#a9269e ;
+  margin:0;
+  margin-bottom:20px;
+}
+.wrapper-2 p{
+  margin:0;
+  font-size:1.3em;
+  color:#aaa;
+  font-family: 'Source Sans Pro', sans-serif;
+  letter-spacing:1px;
+}
+.go-home{
+  color:#fff;
+  background:#f478d9;
+  border:none;
+  padding:10px 50px;
+  margin:30px 0;
+  border-radius:30px;
+  text-transform:capitalize;
+  box-shadow: 0 10px 16px 1px rgb(231, 137, 217);
+}
+.footer-like{
+  margin-top: auto; 
+  background:#D7E6FE;
+  padding:6px;
+  text-align:center;
+}
+.footer-like p{
+  margin:0;
+  padding:4px;
+  color:#5892FF;
+  font-family: 'Source Sans Pro', sans-serif;
+  letter-spacing:1px;
+}
+.footer-like p a{
+  text-decoration:none;
+  color:#5892FF;
+  font-weight:600;
+}
+
+@media (min-width:360px){
+  h1{
+    font-size:4.5em;
+  }
+  .go-home{
+    margin-bottom:20px;
+  }
+}
+
+@media (min-width:600px){
+  .content{
+  max-width:1000px;
+  margin:0 auto;
+}
+  .wrapper-1{
+  height: initial;
+  max-width:620px;
+  margin:0 auto;
+  margin-top:50px;
+  box-shadow: 4px 8px 40px 8px rgba(88, 146, 255, 0.2);
+}
+  
+}
+</style>
+<body>
+    <div class=content>
+        <div class="wrapper-1">
+          <div class="wrapper-2">
+            <h1>Thank you !</h1>
+           
+            <h4>PAYMENT_ID : <%=result.id%></h4>
+            <h4>ORDER_ID : <%=result.order_id%></h4>
+            <h4>METHOD : <%=result.method%></h4>
+            <h4>EMAIL : <%=result.email%></h4>
+            <p>Thanks for Chosing Us </p>
+            <p>you should receive a confirmation email soon </p>
+            <button class="go-home">
+            <a href= "https://cake-licious-angular.herokuapp.com">go home</a>
+            </button>
+          </div>
+          <!-- <div class="footer-like">
+            <p>Email not received?
+             <a href="#">Click here to send again</a>
+            </p>
+          </div> -->
+      </div>
+      </div>
+      
+      
+      
+      <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Source+Sans+Pro" rel="stylesheet">
 </body>
 </html>
