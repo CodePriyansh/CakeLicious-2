@@ -2,9 +2,12 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const otpGenerator = require('otp-generator')
 const nodemailer = require('nodemailer')
+const Razorpay = require('razorpay')
 
 const auth = require('../../core/middlewares/userTokenVerify')
 require('dotenv').config()
+
+var instance = new Razorpay({ key_id: 'rzp_test_zG2UPfGE20QkVD', key_secret: '3xujWy2PWJ9TsCRJrtMUXUt7' })
 
 const domain = "http://localhost:8080"
 
@@ -16,6 +19,28 @@ let mailTransporter = nodemailer.createTransport({
     }
 })
 
+
+router.post('/order',(req,res)=>
+ {
+     console.log(req.body)
+    instance.orders.create({
+        amount:100,
+        currency: "INR",
+        receipt: "receipt#1"
+      },(err,order)=>{
+          console.log(order)
+          res.json(order)
+      })
+ })
+
+
+ router.post("/order-status",(req,res)=>{
+
+    instance.payments.fetch(req.body.razorpay_payment_id).then(paymentDetail=>{
+        console.log(paymentDetail)
+        res.json(paymentDetail)
+    })
+ })
 
 const Customer = require('../../models/customer/customer.model')
 const Product = require('../../models/admin/prod.model')
