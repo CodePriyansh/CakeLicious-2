@@ -91,7 +91,7 @@ router.get('/view-prod-by-category', (request,response)=>{
     })
 })  
 
-router.get('/search-product', (request,response)=>{
+router.post('/search-product', (request,response)=>{
 
     Product.find({prodName:{$regex:req.body.name,$options:'$i'}}).then((result)=>{
           return response.status(200).json(result)
