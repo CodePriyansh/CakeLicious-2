@@ -1,19 +1,19 @@
 const Cart = require('../../models/customer/cart.model')
 
 exports.AddToCart = async (request, response) => {
-    const customerId = request.customer._id
+    const customerId = request.body.Userid
     console.log("Customer Id: ", customerId)
     var check = await Cart.findOne({ customer: customerId});
     console.log("Cart.findOne check: "+check)
-    const cartId = request.body.cartItems
-    console.log('Cart Items: ', cartId)
+    const prodId = request.body.id
+    console.log('Cart Items: ', prodId)
     
     if(!check){
         check = new Cart({
             customer: customerId
         })
     }
-    check.cartItems.push(cartId)
+    check.cartItems.push(prodId)
     await check.save()
     .then(result => {
          console.log("Check save: "+result);
