@@ -327,6 +327,25 @@ exports.login = (req,res)=>{
         })
 }
 
+
+exports.loginWithGoogle = (req,res)=>{
+
+    Customer.findOne({ email: req.body.email }).then((result) => {
+      if (result) {
+        console.log(result)
+        let payload = { subject: result._id }
+        let token = jwt.sign(payload, "secret")
+        res.status(200).json({ result: result, token: token, status: "ok" })
+      }
+      else {
+          console.log(result)
+        res.status(200).json({ message: "failed", result })
+      }
+    }).catch((err) => {
+      res.status(500).json(err)
+    })
+}
+
 exports.signup= (req,res)=>{
     Customer.create({
       name: req.body.name,

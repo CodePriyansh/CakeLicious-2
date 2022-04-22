@@ -128,6 +128,7 @@ router.post('/delete-wishlist-item/:itemId', auth.verifytoken, wishlistControlle
 router.post('/delete-wishlist', auth.verifytoken, wishlistController.DeleteWishlist)
 
 router.post('/place-order', auth.verifytoken, orderController.PlaceOrder)
+router.post('/login-google', customerController.loginWithGoogle)
 
 // router.post('/view-orders', auth, orderController.ViewOrder)
 
