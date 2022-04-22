@@ -36,7 +36,7 @@ exports.addProduct = (request, response, next) => {
             flavour:request.body.flavour
         })
         .then(result => {
-            return response.status(201).json(result);
+            return response.status(200).json(result);
         })
         .catch(err => {
             console.log(err);

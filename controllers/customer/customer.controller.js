@@ -319,7 +319,8 @@ exports.login = (req,res)=>{
             res.status(200).json({ result: result, token: token, status: "ok" })
           }
           else {
-            res.status(200).json({ message: "something went wrong", result })
+              console.log(result)
+            res.status(200).json({ message: "failed", result })
           }
         }).catch((err) => {
           res.status(500).json(err)
