@@ -13,20 +13,25 @@ exports.AddToCart = async (request, response) => {
             customer: customerId
         })
     }
-    check.cartItems.push(prodId)
-    await check.save()
-    .then(result => {
-         console.log("Check save: "+result);
-         return response.status(200).json(result)
-     }).catch(err => {
-         console.log(err);
-         return response.status(200).json(err)
-     })
-}
+
+   
+            check.cartItems.push(prodId)
+            await check.save()
+            .then(result => {
+                 console.log("Check save: "+result);
+                 return response.status(200).json({result:result,status:'ok'})
+             }).catch(err => {
+                 console.log(err);
+                 return response.status(200).json(err)
+             })
+    }
+    
+
 
 
 exports.ViewCart = async (request, response) => {
-    const customerId = request.customer._id
+    const customerId = request.body.userId
+    console.log(customerId)
     await Cart.findOne({customer: customerId}).populate('cartItems').exec()
     .then(result => {
         return response.status(200).json(result)
@@ -37,14 +42,15 @@ exports.ViewCart = async (request, response) => {
 }
 
 exports.DeleteCartItem = async (request, response) => {
-    const {itemId} = request.params
-    const customerId = request.customer._id
+    
+    const customerId = request.body.userId
+    const id = request.body.id
     console.log("Customer Id from token: " + customerId)
     await Cart.updateOne({customer: customerId},
         {
             $pullAll:
             {
-            cartItems: [itemId]
+            cartItems: [id]
         }
 })
     .then(result => {

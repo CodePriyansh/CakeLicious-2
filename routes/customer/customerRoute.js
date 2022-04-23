@@ -115,7 +115,7 @@ router.post('/add-to-card', auth.verifytoken, cartController.AddToCart)
 
 router.post('/view-cart', auth.verifytoken, cartController.ViewCart)
 
-router.post('/delete-cart-item/:itemId', auth.verifytoken, cartController.DeleteCartItem)
+router.post('/delete-cart-item', auth.verifytoken, cartController.DeleteCartItem)
 
 router.post('/delete-cart', auth.verifytoken, cartController.DeleteCart)
 
