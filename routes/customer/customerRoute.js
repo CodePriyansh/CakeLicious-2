@@ -14,7 +14,7 @@ const orderController = require('../../controllers/customer/order.controller')
 const auth = require('../../core/middlewares/userTokenVerify')
 
 const Razorpay = require('razorpay')
-var instance = new Razorpay({ key_id: 'rzp_test_zG2UPfGE20QkVD', key_secret: '3xujWy2PWJ9TsCRJrtMUXUt7' })
+var instance = new Razorpay({ key_id: 'rzp_test_Wp8VeLBusO80zT', key_secret: 'dSqGhFplITE1YB14GewtVqOM' })
 
 const multer = require('multer')
 
@@ -32,10 +32,13 @@ router.post('/order',(req,res)=>
  {
      console.log(req.body)
     instance.orders.create({
-        amount:100,
+        amount:10000,
         currency: "INR",
         receipt: "receipt#1"
       },(err,order)=>{
+          if(err){
+              console.log(err)
+          }
           console.log(order)
           res.json(order)
       })
@@ -51,6 +54,8 @@ router.post('/order',(req,res)=>
         res.render("success.ejs",{
             result:paymentDetail
         })
+    }).catch((err)=>{
+console.log(err)
     })
 
 
