@@ -45,7 +45,7 @@ exports.DeleteCartItem = async (request, response) => {
     
     const customerId = request.body.userId
     const id = request.body.id
-    console.log("Customer Id from token: " + customerId)
+    // console.log("Customer Id from token: " + customerId)
     await Cart.updateOne({customer: customerId},
         {
             $pullAll:
