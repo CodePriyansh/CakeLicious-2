@@ -32,7 +32,7 @@ router.post('/order',(req,res)=>
  {
      console.log(req.body)
     instance.orders.create({
-        amount:786554,
+        amount:req.body.amount,
         currency: "INR",
         receipt: "receipt#1"
       },(err,order)=>{
